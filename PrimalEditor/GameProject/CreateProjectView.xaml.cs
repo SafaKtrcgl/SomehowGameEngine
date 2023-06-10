@@ -1,15 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PrimalEditor.GameProject
 {
@@ -21,6 +11,22 @@ namespace PrimalEditor.GameProject
         public CreateProjectView()
         {
             InitializeComponent();
+        }
+
+        private void On_CreateButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            NewProject context = DataContext as NewProject;
+            string projectPath = context.CreateProject(templateListBox.SelectedItem as ProjectTemplate);
+            bool dialogResult = false;
+            Window window = Window.GetWindow(this);
+
+            if (!string.IsNullOrEmpty(projectPath))
+            {
+                dialogResult = true;
+            }
+
+            window.DialogResult = dialogResult;
+            window.Close();
         }
     }
 }
