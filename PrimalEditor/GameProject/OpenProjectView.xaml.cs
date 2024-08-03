@@ -21,6 +21,12 @@ namespace PrimalEditor.GameProject
         public OpenProjectView()
         {
             InitializeComponent();
+
+            Loaded += (s, e) =>
+            {
+                var item = projectsListBox.ItemContainerGenerator.ContainerFromIndex(projectsListBox.SelectedIndex) as ListBoxItem;
+                item?.Focus();
+            };
         }
 
         private void OnOpen_Button_Click(object sender, RoutedEventArgs e)
@@ -37,14 +43,15 @@ namespace PrimalEditor.GameProject
         {
             var project = OpenProject.Open(projectsListBox.SelectedItem as ProjectData);
             bool dialogResult = false;
-            var win = Window.GetWindow(this);
+            var window = Window.GetWindow(this);
             if (project != null)
             {
                 dialogResult = true;
+                window.DataContext = project;
             }
 
-            win.DialogResult = dialogResult;
-            win.Close();
+            window.DialogResult = dialogResult;
+            window.Close();
         }
     }
 }
