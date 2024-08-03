@@ -4,11 +4,11 @@ using System.Windows.Controls;
 namespace PrimalEditor.GameProject
 {
     /// <summary>
-    /// Interaction logic for CreateProjectView.xaml
+    /// Interaction logic for NewProjectView.xaml
     /// </summary>
-    public partial class CreateProjectView : UserControl
+    public partial class NewProjectView : UserControl
     {
-        public CreateProjectView()
+        public NewProjectView()
         {
             InitializeComponent();
         }
@@ -23,6 +23,8 @@ namespace PrimalEditor.GameProject
             if (!string.IsNullOrEmpty(projectPath))
             {
                 dialogResult = true;
+                var project = OpenProject.Open(new ProjectData() { ProjectName = context.ProjectName, ProjectPath = projectPath });
+                window.DataContext = project;
             }
 
             window.DialogResult = dialogResult;
