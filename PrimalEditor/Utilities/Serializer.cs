@@ -18,7 +18,8 @@ namespace PrimalEditor.Utilities
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                //TODO: Proper Logging
+                Logger.Log(MessageType.Error, $"Failed to serialize {instance} to {path}");
+                throw;
             }
         }
 
@@ -34,9 +35,8 @@ namespace PrimalEditor.Utilities
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                //TODO: Proper Logging
-
-                return default(T);
+                Logger.Log(MessageType.Error, $"Failed to deserialize {path}");
+                throw;
             }
         }
     }
